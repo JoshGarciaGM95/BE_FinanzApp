@@ -4,6 +4,6 @@ const { authenticate } = require('../middleware/auth');
 
 const router = express.Router();
 
-router.post('/create', authenticate, newBranchUser);
+router.post('/asign', authenticate, newBranchUser);
 
 module.exports = router;

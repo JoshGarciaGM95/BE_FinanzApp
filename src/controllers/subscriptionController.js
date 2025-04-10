@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { createSubscription, getAllSubscriptions, getSubscriptionByUserId, updateSubscription } = require('../models/Subscription');
 
 const createNewSubscription = async (req, res) => {
-  const { user_id, plan_id, start_date, end_date, status, payment_method } = req.body;
+  const { user_id, plan_id, start_date, end_date, payment_method } = req.body;
 
   try {
     const getSubscriptionsByUserId = await getSubscriptionByUserId(user_id);
@@ -11,7 +11,7 @@ const createNewSubscription = async (req, res) => {
     if(getSubscriptionsByUserId !== null){
       res.status(201).json({ message: 'Error la suscripción de este usuario ya existe!' });      
     }else{
-      const newSubscription = await createSubscription(user_id, plan_id, start_date, end_date, status, payment_method);
+      const newSubscription = await createSubscription(user_id, plan_id, start_date, end_date, 'active', payment_method);
       res.status(201).json(newSubscription);
     }
 

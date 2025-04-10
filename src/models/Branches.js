@@ -16,7 +16,7 @@ const Branches = sequelize.define('Branches', {
         allowNull: false,
         unique: false,
     },
-    adress: {
+    address: {
         type: DataTypes.STRING,
         allowNull: false,
     },
@@ -39,8 +39,8 @@ const Branches = sequelize.define('Branches', {
     timestamps: false
 });
 
-const createBranch = async (company_id, branch_name, adress, phone, status, creation_date) => {
-    return await Branches.create({ company_id, branch_name, adress, phone, status, creation_date });
+const createBranch = async (company_id, branch_name, address, phone, status, creation_date) => {
+    return await Branches.create({ company_id, branch_name, address, phone, status, creation_date });
 }
 
 const getBranchById = async (branch_id) => {
@@ -55,8 +55,8 @@ const getBranchByCompanyId = async (company_id) => {
     return await Branches.findAll({ where: { company_id } });
 }
 
-const updateBranch = async (branch_id, branch_name, adress, phone, status) => {
-    return await Branches.update({ branch_name, adress, phone, status }, { where: { branch_id } });
+const updateBranch = async (branch_id, branch_name, address, phone, status) => {
+    return await Branches.update({ branch_name, address, phone, status }, { where: { branch_id } });
 }
 
 const deleteBranch = async (branch_id) => {

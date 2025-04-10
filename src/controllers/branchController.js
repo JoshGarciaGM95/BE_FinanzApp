@@ -10,9 +10,9 @@ const {
 
 
 const newBranch = async (req, res) => {
-    const { company_id, branch_name, adress, phone, status, creation_date } = req.body;
+    const { company_id, branch_name, address, phone, status, creation_date } = req.body;
     try {
-        const branch = await createBranch(company_id, branch_name, adress, phone, status, creation_date);
+        const branch = await createBranch(company_id, branch_name, address, phone, status, creation_date);
         res.json(branch)
     } catch (err) {
         console.error(err);

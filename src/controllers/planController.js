@@ -1,6 +1,6 @@
 const { getAllPlans } = require('../models/Plan');
 
-const getListPlans = async (res) => {
+const getListPlans = async (req, res) => {
     try {
         const plans = await getAllPlans();
         res.json(plans);

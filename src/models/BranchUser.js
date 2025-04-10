@@ -22,10 +22,9 @@ const BranchUser = sequelize.define('BranchUser', {
     assigned_date: {
         type: DataTypes.DATE,
         allowNull: true,
-
     }
 }, {
-    tableName: 'BranchUsers',
+    tableName: 'branchusers',
     timestamps: false
 });
 
