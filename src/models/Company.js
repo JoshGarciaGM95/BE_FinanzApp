@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
 const Company = sequelize.define('Company', {
-    Company_id: {
+    company_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
@@ -11,7 +11,7 @@ const Company = sequelize.define('Company', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    Company_name: {
+    company_name: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: false,
@@ -42,8 +42,8 @@ const Company = sequelize.define('Company', {
     timestamps: false
 });
 
-const createCompany = async (user_id, Company_name, contact_email, contact_phone, address, registration_date, status) => {
-    return await Company.create({ user_id, Company_name, contact_email, contact_phone, address, registration_date, status });
+const createCompany = async (user_id, company_name, contact_email, contact_phone, address, registration_date, status) => {
+    return await Company.create({ user_id, company_name, contact_email, contact_phone, address, registration_date, status });
 }
 
 const getCompanyById = async (Company_id) => {
@@ -58,17 +58,19 @@ const getCompanyByUserId = async (user_id) => {
     return await Company.findOne({ where: { user_id } });
 }
 
-const updateCompany = async (Company_id, Company_name, contact_email, contact_phone, address, registration_date, status) => {
-    return await Company.update({ Company_name, contact_email, contact_phone, address, registration_date, status }, { where: { Company_id } });
+const updateCompany = async (company_id, company_name, contact_email, contact_phone, address, registration_date, status) => {
+    return await Company.update({ company_name, contact_email, contact_phone, address, registration_date, status }, { where: { company_id } });
 }
 
-const deleteCompany = async (Company_id) => {
-    return await Company.destroy({ where: { Company_id } });
+const deleteCompany = async (company_id) => {
+    return await Company.destroy({ where: { company_id } });
 }
 
 const deleteCompanyByUserId = async (user_id) => {
     return await Company.destroy({ where: { user_id } });
 }
 
-
-
+module.exports = {
+    createCompany,
+    updateCompany
+}
