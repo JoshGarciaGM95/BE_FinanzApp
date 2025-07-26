@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const { sequelize } = require('../config/db');
 
 const User = sequelize.define('User', {
     user_id: {
@@ -50,7 +50,7 @@ const createRegisteredUser = async (username, email, password, role_id, status, 
 
 // Función para obtener un usuario por email
 const getUserByEmail = async (email) => {
-    return await User.findOne({ where: { email } });
+    return await User.findOne({ where: { email }});
 };
 
 //Funcion para obtener todos los usuarios

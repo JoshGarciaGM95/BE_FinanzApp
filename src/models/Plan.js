@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const { sequelize } = require('../config/db');
 
 const Plan = sequelize.define('Plan', {
     plan_id: {
@@ -12,12 +12,12 @@ const Plan = sequelize.define('Plan', {
         allowNull: false,
     },
     price_monthly: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.DECIMAL,
         allowNull: false,
         unique: false,
     },
     price_yearly: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.DECIMAL,
         allowNull: false,
     },
     max_users: {
@@ -70,11 +70,53 @@ const deletePlanById = async (plan_id) => {
     return await Plan.destroy({ where: { plan_id } });
 };
 
+const seedPlans = async () => {
+  const count = await Plan.count();
+  if (count === 0) {
+    await Plan.bulkCreate([
+      {
+        plan_name: 'Básico',
+        price_monthly: 10.00,
+        price_yearly: 100.00,
+        max_users: 3,
+        max_branches: 1,
+        features: 'Gestión básica de empresa y sucursal',
+        status: 'active',
+        creation_date: new Date()
+      },
+      {
+        plan_name: 'Profesional',
+        price_monthly: 25.00,
+        price_yearly: 250.00,
+        max_users: 10,
+        max_branches: 5,
+        features: 'Gestión avanzada, reportes y multi-sucursal',
+        status: 'active',
+        creation_date: new Date()
+      },
+      {
+        plan_name: 'Premium',
+        price_monthly: 50.00,
+        price_yearly: 500.00,
+        max_users: 50,
+        max_branches: 20,
+        features: 'Todas las funcionalidades, soporte prioritario',
+        status: 'active',
+        creation_date: new Date()
+      }
+    ]);
+    console.log('Planes de ejemplo insertados.');
+  } else {
+    console.log('Ya existen planes en la base de datos, no se insertan duplicados.');
+  }
+};
+
 module.exports = {
     Plan,
     createPlan,
     getPlanById,
     getAllPlans,
     updatePlanById,
-    deletePlanById
+    deletePlanById,
+    seedPlans
 };

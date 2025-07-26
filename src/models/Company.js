@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const { sequelize } = require('../config/db');
 
 const Company = sequelize.define('Company', {
     company_id: {
@@ -54,7 +54,7 @@ const getAllCompanies = async () => {
     return await Company.findAll();
 }
 
-const getCompanyByUserId = async (user_id) => {
+const getCompanyByUserId = async (user_id) => {  
     return await Company.findOne({ where: { user_id } });
 }
 
@@ -72,5 +72,6 @@ const deleteCompanyByUserId = async (user_id) => {
 
 module.exports = {
     createCompany,
-    updateCompany
+    updateCompany,
+    getCompanyByUserId
 }

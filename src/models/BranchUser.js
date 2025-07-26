@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
+const { sequelize } = require('../config/db');
 
 const BranchUser = sequelize.define('BranchUser', {
     branch_user_id: {
@@ -52,6 +52,10 @@ const getBranchUsersByBranchId = async (branch_id) => {
     return await BranchUser.findAll({ where: { branch_id } });
 }
 
+const getBranchUsersByUserId = async (user_id) => {
+    return await BranchUser.findAll({ where: { user_id } });
+}
+
 module.exports = {
     createBranchUser,
     updateBranchUser,
@@ -59,4 +63,5 @@ module.exports = {
     getBranchUserById,
     getAllBranchUsers,
     getBranchUsersByBranchId
+    ,getBranchUsersByUserId
 };

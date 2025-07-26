@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-
+const { sequelize } = require('../config/db');
+const { createBranchUser } = require('./BranchUser');
 const Branches = sequelize.define('Branches', {
     branch_id: {
         type: DataTypes.INTEGER,
@@ -39,8 +39,10 @@ const Branches = sequelize.define('Branches', {
     timestamps: false
 });
 
-const createBranch = async (company_id, branch_name, address, phone, status, creation_date) => {
-    return await Branches.create({ company_id, branch_name, address, phone, status, creation_date });
+const createBranch = async (company_id, branch_name, address, phone, status, creation_date, idUser) => {
+    var branch = await Branches.create({ company_id, branch_name, address, phone, status, creation_date });
+    await createBranchUser(branch.branch_id, idUser, 'active', new Date());
+    return branch;
 }
 
 const getBranchById = async (branch_id) => {
@@ -53,6 +55,10 @@ const getAllBranches = async () => {
 
 const getBranchByCompanyId = async (company_id) => {
     return await Branches.findAll({ where: { company_id } });
+}
+
+const getBranchesByIds = async (branchIds) => {
+    return await Branches.findAll({ where: { branch_id: branchIds } });
 }
 
 const updateBranch = async (branch_id, branch_name, address, phone, status) => {
@@ -75,4 +81,5 @@ module.exports = {
     updateBranch,
     deleteBranch,
     deleteBranchByCompanyId
+    ,getBranchesByIds
 };
