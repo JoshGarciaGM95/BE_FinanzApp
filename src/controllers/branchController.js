@@ -21,9 +21,9 @@ const newBranch = async (req, res) => {
 }
 
 const getBranchByCompany = async (req, res) => {
-    const { company_id } = req.params;
+    const { company_Id } = req.params; // <-- usa el nombre correcto
     try {
-        const branch = await getBranchByCompanyId(company_id);
+        const branch = await getBranchByCompanyId(company_Id);
         res.json(branch)
     } catch (err) {
         console.error(err);

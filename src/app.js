@@ -4,6 +4,7 @@ require('dotenv').config(); // Cargar variables de entorno
 // Importar instancia de sequelize
 const { sequelize } = require('./config/db');
 const { seedPlans } = require('./models/Plan');
+//const { seedCategories } = require('./models/Categories');
 
 const userRoutes = require('./routes/userRoutes');
 const planRoutes = require('./routes/planRoutes');
@@ -52,8 +53,8 @@ app.get('/Health', (req, res) => {
 sequelize.sync()
   .then(async () => {
     console.log('Tablas sincronizadas correctamente');
-    await seedPlans(); // Ejecuta la inserción de planes de ejemplo
-    // Configurar el puerto
+    await seedPlans();
+    //await seedCategories();
     const PORT = process.env.PORT || 3080;
     app.listen(PORT, () => {
       console.log(`Servidor corriendo en http://localhost:${PORT}`);

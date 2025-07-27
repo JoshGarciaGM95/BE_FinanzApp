@@ -50,10 +50,37 @@ const deleteCategory = async (category_id, company_id) => {
     return true;
 }
 
+// const seedCategories = async () => {
+//   const count = await Categories.count();
+//   if (count === 0) {
+//     await Categories.bulkCreate([
+//       {
+//         category_name: 'Tecnología',
+//         description: 'Productos relacionados con tecnología',
+//         company_id: 1
+//       },
+//       {
+//         category_name: 'Muebles',
+//         description: 'Muebles y decoración',
+//         company_id: 1
+//       },
+//       {
+//         category_name: 'Ropa',
+//         description: 'Ropa y accesorios',
+//         company_id: 1
+//       }
+//     ]);
+//     console.log('Categorías de ejemplo insertadas.');
+//   } else {
+//     console.log('Ya existen categorías en la base de datos, no se insertan duplicados.');
+//   }
+// };
+
 module.exports = {
     getAllCategories,
     getCategoryById,
     createCategory,
     updateCategory,
-    deleteCategory
+    deleteCategory,
+    //seedCategories
 };
